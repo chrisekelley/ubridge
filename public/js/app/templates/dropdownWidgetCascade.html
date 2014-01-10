@@ -1,0 +1,8 @@
+{{#if renderValueElement}} {{#dropdownValue enumerations value}}
+{{/dropdownValue}}
+{{else}}
+<select id='{{identifier}}' class='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
+{{#dropdownWidgetValue enumerations value}}
+{{/dropdownWidgetValue}}
+</select>
+{{/if}}

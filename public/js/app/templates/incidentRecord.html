@@ -1,0 +1,30 @@
+<!--<div id="pagewidth-vert">-->
+    <!--<table class="patient-home-vert" width="100%">-->
+        <!--<tbody><tr>-->
+            <!--<td style="vertical-align: top;">-->
+                <!--<button id='form-home' class="menu-blue" onClick="window.location.href = '#home'">Home</button>-->
+                <!--{{#if phone}}-->
+                <!--<span class="patientName">Request from {{phone}} on {{#dateFormatdMY created}}{{/dateFormatdMY}}</span>-->
+                <!--{{/if}}-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+<!--</div>-->
+<div id="form-container">
+    <h1><a href="#edit/{{recordId}}">{{label}}</a></h1>
+    <!--<p>{{#if phone}}-->
+        <!--<span class="patientName">Request from {{phone}} on {{#dateFormatdMY created}}{{/dateFormatdMY}}</span>-->
+        <!--{{/if}}-->
+    <!--</p>-->
+    <!--<h2>ID: {{recordId}}</h2>-->
+    <form id="theForm">
+        <div id="formElements">
+            <p class="dateHeader">{{#if _id}}
+                Created: {{#dateFormatdMY created}}{{/dateFormatdMY}}<br/>
+                Modified: {{#dateFormatdMY lastModified}}{{/dateFormatdMY}}
+                {{/if}}
+            </p>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,8 @@
+
+{{#if renderFormElement}}
+{{#if value}}
+<input id='{{identifier}}' class="css-checkbox" {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1' checked='checked'></input>
+{{else}}
+<input id='{{identifier}}' class="css-checkbox" {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1'></input>
+{{/if}}
+{{/if}}

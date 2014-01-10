@@ -1,0 +1,150 @@
+<script id="form-element-template" type="text/x-handlebars-template">
+  	{{{renderWidget}}}
+</script>
+<script id="recordElementTemplate" type="text/x-handlebars-template">
+  	{{{renderValue}}}
+</script>
+<script id="record-template" type="text/x-handlebars-template">
+    <td><a href="#record/{{_id}}">{{formId}}</a></td><td>{{#dateFormat lastModified}}{{/dateFormat}}</td>
+</script>
+<script id="edit-template" type="text/x-handlebars-template">
+    <td><a href="#edit/{{_id}}">{{formId}}</a></td><td>{{#dateFormat lastModified}}{{/dateFormat}}</td>
+</script>
+<script id="search-template" type="text/x-handlebars-template">
+{{#if phone}}
+    <td>{{#renderPriority priority dateResolved}}{{/renderPriority}}</td><td onclick="window.location='#record/{{_id}}'"><a href="#record/{{_id}}" title="ID: {{assignedId}}">{{phone}}&nbsp;&nbsp;</a></td><td>{{#renderVillage village}}{{/renderVillage}}</td>
+    <td>{{#if dep_administration}}Admin<br/>{{/if}}
+        {{#if dep_community_development}}Comm. Dev.<br/>{{/if}}
+        {{#if dev_council}}Council<br/>{{/if}}
+        {{#if dev_education}}Edu.<br/>{{/if}}
+        {{#if dev_finance}}Fin.<br/>{{/if}}
+        {{#if dev_health}}Health<br/>{{/if}}
+        {{#if dev_nat_resources}}Nat. Res.<br/>{{/if}}
+        {{#if dev_production}}Prod.<br/>{{/if}}
+        {{#if dev_works}}Works<br/>{{/if}}</td>
+    <td>{{#dateFormatDate lastModified}}{{/dateFormatDate}}</td>
+	{{else}}
+    <td>{{#renderPriority priority dateResolved}}{{/renderPriority}}</td><td><a href="#record/{{_id}}" title="ID: {{assignedId}}"> --- </a></td><td>{{#renderVillage village}}{{/renderVillage}}</td>
+    <td>{{#if dep_administration}}Admin<br/>{{/if}}
+        {{#if dep_community_development}}Comm. Dev.<br/>{{/if}}
+        {{#if dev_council}}Council<br/>{{/if}}
+        {{#if dev_education}}Edu.<br/>{{/if}}
+        {{#if dev_finance}}Fin.<br/>{{/if}}
+        {{#if dev_health}}Health<br/>{{/if}}
+        {{#if dev_nat_resources}}Nat. Res.<br/>{{/if}}
+        {{#if dev_production}}Prod.<br/>{{/if}}
+        {{#if dev_works}}Works<br/>{{/if}}</td>
+    <td>{{#dateFormatDate lastModified}}{{/dateFormatDate}}</td>
+{{/if}}
+</script>
+<script id="actionTakenList-template" type="text/x-handlebars-template">
+    <td><a href="#editActionTaken/{{_id}}" title="Edit this Action Taken">{{#dateFormatDate lastModified}}{{/dateFormatDate}}</a></td>
+    <td>{{#if initial_assignment}}Initial Assignment<br/>{{/if}}
+        {{#if followup}}Followup<br/>{{/if}}
+        {{#if phonecall}}Phone call<br/>{{/if}}
+        {{#if dev_education}}Edu.<br/>{{/if}}
+        {{#if resolved}}Resolved<br/>{{/if}}</td>
+    <td>{{comment}}</td>
+</script>
+<script id="recordValue" type="text/x-handlebars-template">
+    {{value}}
+</script>
+<script id="recordMDYTimeDateValue" type="text/x-handlebars-template">
+    {{#dateFormatdMY value}}{{/dateFormatdMY}}
+</script>
+<script id="recordDropdownValue" type="text/x-handlebars-template">
+	{{#dropdownValue enumerations value}}
+	{{/dropdownValue}}
+</script>
+<script id="recordDropdownCSVValue" type="text/x-handlebars-template">X
+	{{#dropdownCSVValue enumerations value}}
+	{{/dropdownCSVValue}}
+</script>
+<script id="recordCheckboxValue" type="text/x-handlebars-template">
+	{{#checkboxValue value}}
+	{{/checkboxValue}}
+</script>
+<script id="recordCheckboxAlert" type="text/x-handlebars-template"></script>
+<script id="recordYesnoValue" type="text/x-handlebars-template">
+	{{#yesNoValue value}}
+	{{/yesNoValue}}
+</script>
+<script id="recordGenderValue" type="text/x-handlebars-template">
+	{{#genderValue value}}
+	{{/genderValue}}
+</script>
+<script id="doNotRender" type="text/x-handlebars-template"></script>
+<script id="inputTextWidget" type="text/x-handlebars-template">
+    <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}' size='{{size}}' maxlength='{{maxlength}}'></input>
+</script>
+<script id="datepickerWidget" type="text/x-handlebars-template">
+  <input id='{{identifier}}' class='datep' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}' size='{{size}}' maxlength='{{maxlength}}'></input>
+</script>
+<script id="checkboxWidget" type="text/x-handlebars-template">
+	{{#if value}}
+  	<input id='{{identifier}}' class="css-checkbox" {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1' checked='checked'></input>
+  	{{else}}
+  	  	<input id='{{identifier}}' class="css-checkbox" {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1'></input>
+	{{/if}}
+    <label for="{{identifier}}" class="css-label"></label>
+</script>
+<script id="checkboxAlertWidget" type="text/x-handlebars-template">
+    {{#if value}}
+	<input id='{{identifier}}' class="css-checkbox" {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1' checked='checked'></input>
+    {{else}}
+    <input id='{{identifier}}' class="css-checkbox" {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1'></input>
+    {{/if}}
+    <label for="{{identifier}}" class="css-label"></label>
+</script>
+<script id="textareaWidget" type="text/x-handlebars-template">
+  	<br/><textarea id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' rows='{{rows}}' cols='{{cols}}'>{{value}}</textarea>
+</script>
+<script id="dropdownWidget" type="text/x-handlebars-template">
+	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
+	{{#dropdown enumerations}}
+	{{/dropdown}}
+	</select>
+</script>
+<script id="dropdownWidgetFormDesigner" type="text/x-handlebars-template">
+<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
+{{#dropdownWidgetValue enumerations value}}
+	{{/dropdownWidgetValue}}
+	</select>
+</script>
+<script id="dropdownWidgetCascade" type="text/x-handlebars-template">
+<select id='{{identifier}}' class='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
+{{#dropdownWidgetValue enumerations value}}
+	{{/dropdownWidgetValue}}
+	</select>
+</script>
+<script id="displayTableWidget" type="text/x-handlebars-template">
+	<table id="tbl{{{identifier}}}" border="0" cellpadding="4" cellspacing="2" class="formTable"></table>
+</script>
+<script id="displayHeaderWidget" type="text/x-handlebars-template">
+	<span id='sectionHeader{{identifier}}' class='sectionHeader'> {{label}}</span>
+</script>
+<script id="displaySubHeaderWidget" type="text/x-handlebars-template">
+	<span id='sectionSubHeader{{identifier}}' class='sectionHeader'>{{label}}</span>
+</script>
+<script id="displayInfotextWidget" type="text/x-handlebars-template">
+	<strong>{{label}}</strong>
+</script>
+<script id="displayActionTakenLink" type="text/x-handlebars-template">
+    <button id="actionTakenLink" class="menu-blue" onclick="window.location.href = '#actionTakenForm/{{value}}'">Add Action Taken</button>
+</script>
+<script id="yesnoWidget" type="text/x-handlebars-template">
+	<br/>
+	<input type="radio" id = "yes{{identifier}}" name="{{identifier}}" value="1" /><label for="yes{{identifier}}">Yes</label><br />
+	<input type="radio" id = "no{{identifier}}" name="{{identifier}}" value="0" /><label for="no{{identifier}}">No</label>
+</script>
+<script id="genderWidget" type="text/x-handlebars-template">
+	<br/>
+	<input type="radio" id = "f{{identifier}}" name="{{identifier}}" value="1" /><label for="f{{identifier}}">Female</label><br />
+	<input type="radio" id = "m{{identifier}}" name="{{identifier}}" value="2" /><label for="m{{identifier}}">Male</label>
+</script>
+<script id="hiddenWidget" type="text/x-handlebars-template">
+    <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='hidden' value='{{value}}'></input>
+</script>
+<script id="buttonWidget" type="text/x-handlebars-template">
+    <button id='{{identifier}}' class='wideButton' type='button'>{{label}}</button>
+</script>

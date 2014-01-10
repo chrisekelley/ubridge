@@ -1,0 +1,24 @@
+<div class="navbar nav">
+    <div class="navbar-inner">
+        <a class="brand" href="#">UBridge</a>
+        <form name="searchForm" id="search-results-form" onsubmit="return false;">
+            <input type="text" id="search_string" name="search_string" placeholder="Search:Phone" size="13"/>
+            <button id='form-search' value="Search" class="shiny-red">Search</button>
+            <button id='form-client'class="menu-blue" style="width: 60px;">New</button>
+            <button id='form-config'class="menu-blue" style="width: 60px;">Login</button>
+            <select id="department" data-optional="true" name="department">
+                <option value="">Filter by Department</option>
+                <option value="1">Admin</option>
+                <option value="7">Community Development</option>
+                <option value="6">Council</option>
+                <option value="3">Education</option>
+                <option value="2">Finance and Planning</option>
+                <option value="4">Health</option>
+                <option value="8">Natural Resources</option>
+                <option value="9">Production</option>
+                <option value="5">Works</option>
+            </select>
+            <span id="alertMessage" onClick="document.location = 'index.html'"></span>
+        </form>
+    </div>
+</div>

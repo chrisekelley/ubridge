@@ -1,0 +1,4 @@
+{{#if renderValueElement}} {{value}}
+{{else}}
+<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}' size='{{size}}' maxlength='{{maxlength}}'></input>
+{{/if}}
