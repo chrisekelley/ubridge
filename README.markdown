@@ -3,6 +3,49 @@ UBridge
 This is a trouble-ticket application that uses Marionette-Require-Boilerplate (MRB) for structure and Pouchdb for persistence.
 See the [Olutindo Readme](https://github.com/chrisekelley/olutindo) for more information about this app.
 
+# Coconut #
+This application uses a modified version of the [Coconut framework](https://github.com/chrisekelley/coconut).
+
+## App.js
+App.js inits the app, creating the two regions used in the app, populating the forms, setting up the Backbone PouchDB adapter,
+and starting replication with the master server.
+
+## AppRouter.js
+Define application routes here.
+
+## DesktopController.js
+The logic for the routes defined in AppRouter.js is in DesktopController.js.
+
+Although MRB provides logic for desktop and mobile, this app currently only uses DesktopController.js for app controller.
+
+## Form and record rendering
+Forms and records are rendered dynamically using the json file in the form_defs directory. The form rendering logic is in views/RecordView.js.
+The form/record element widget rendering code is in templates/helpers/renderValue.js
+
+### Widget Exmaple
+
+Here is an example of the code to render both the form input element and record value for a dropdown, in templates/recordDropdownValue.html:
+
+    {{#if renderValueElement}} {{#dropdownValue enumerations value}}
+    {{/dropdownValue}}
+    {{else}}
+    <select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
+    {{#dropdownWidgetValue enumerations value}}
+    {{/dropdownWidgetValue}}
+    </select>
+    {{/if}}
+
+## Templates
+Templates are in /templates. Each template is its own file; in the coconut framework, all templates are in a single file, templates.html.
+If a widget you desire is not converted over to the new format, you may simply need to copy the code for that widget from templates.html
+and create a new template file.
+
+As noted below in the MRB readme, the [require-handlebars-plugin](https://github.com/SlexAxton/require-handlebars-plugin) (`hbs` for short)
+is used to load pre-compiled Handlebars views from the templates specified.
+
+## Helpers
+Helpers are in /templates/helpers.
+
 The Marionette-Require-Boilerplate (MRB) readme follows.
 
 Marionette-Require-Boilerplate (MRB)

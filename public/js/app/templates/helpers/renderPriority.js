@@ -12,7 +12,7 @@ define(['handlebars'], function ( Handlebars ){
         out = '<img src="img/alert-high.png" title="High Priority">';
         break;
     }
-    if (dateResolved !== null) {
+    if (typeof dateResolved !== 'undefined') {
       out = '<img src="img/resolved.png" title="Resolved">';
     }
     return out;
