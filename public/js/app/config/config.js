@@ -9,7 +9,7 @@ require.config({
     "jquerymobile":"../libs/jquery.mobile",
     "underscore":"../libs/lodash",
     "backbone":"../libs/backbone",
-    "marionette":"../libs/backbone.marionette",
+    "marionette-original":"../libs/backbone.marionette",
     "handlebars":"../libs/handlebars",
     "hbs":"../libs/hbs",
     "i18nprecompile":"../libs/i18nprecompile",
@@ -21,6 +21,7 @@ require.config({
     "inflection": "../libs/inflection",
 
     // Plugins
+    "marionette":"../libs/plugins/marionette.addons",
     "backbone.validateAll":"../libs/plugins/Backbone.validateAll",
     "bootstrap":"../libs/plugins/bootstrap",
     "text":"../libs/plugins/text",
@@ -61,6 +62,9 @@ require.config({
     },
     // Backbone.validateAll plugin that depends on Backbone
     "backbone.validateAll":["backbone"],
+
+    // marionette.addons plugin that depends on Backbone
+//    "marionette.addons":["backbone", "marionette"],
 
     "jasmine": {
       // Exports the global 'window.jasmine' object

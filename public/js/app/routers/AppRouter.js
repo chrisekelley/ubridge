@@ -5,7 +5,7 @@ define(['backbone', 'marionette'], function(Backbone, Marionette) {
       "":                                       "index",
       "home/:endkey":                           "index",
       "search/:query":        						      "search",    		          // #search
-      "search/:query/:department":        			"search",    		          // #search
+      "search/:query/:departmentId/:endkey":      "search",    		          // #search
       "incidentForm":           							  "incidentForm",    		    // #incidentForm
       "record/:incidentId":					            "record",                 // #record
       "actionTakenForm/:incidentId":           	"actionTakenForm",    		// #actionTaken

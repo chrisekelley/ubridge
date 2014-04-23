@@ -2,9 +2,9 @@
 
 define(['backbone', 'marionette','views/RecordElementView','views/FormElementView', 'collections/FormElements',
   'hbs!templates/displayTableWidget', 'form2object', 'toObject', 'FORMY','collections/ActionTakenRecordList', 'hbs!templates/hiddenWidget',
-  'models/ActionTaken', 'models/Record', 'App', 'coconutUtils'],
+  'models/ActionTaken', 'models/Record', 'App', 'coconutUtils', 'controllers/DesktopController'],
   function (Backbone, Marionette, RecordElementView, FormElementView, FormElements, displayTableWidget, form2object,
-            toObject, FORMY, ActionTakenRecordList, hiddenWidget, ActionTaken, Record, App, coconutUtils) {
+            toObject, FORMY, ActionTakenRecordList, hiddenWidget, ActionTaken, Record, App, coconutUtils, AppController) {
   "use strict";
 
   /**
@@ -370,7 +370,9 @@ define(['backbone', 'marionette','views/RecordElementView','views/FormElementVie
             record.type="incident";
             record.save();
             //this.inspectModelAndGo(incident);
-            App.appRouter.navigate('home', true);
+//            AppController.index();
+//            App.appRouter.navigate('index', false);
+            App.trigger("index")
           } else if (formId === "actionTaken") {
             if (this.model.get("records") === null) {
               this.model.set("records", new IncidentRecordList)
@@ -440,7 +442,8 @@ define(['backbone', 'marionette','views/RecordElementView','views/FormElementVie
                 var parentId = model.get("parentId");
                 App.appRouter.navigate('record/'+ parentId, true);
               } else {
-                App.appRouter.navigate('home', true);
+//                App.appRouter.navigate('home', true);
+                App.trigger("index")
               }
             },
             error: function() {

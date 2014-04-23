@@ -6,6 +6,13 @@
                 <th title="Priority"><strong>!</strong></th><th>Phone</th><th>Village</th><th>Dept.</th><th style="border-right:none;">Date</th>
             </tr>
             </thead>
+            {{#if endkey}}
+            <tfoot>
+            <tr>
+                <td colspan="4"></td><td><div id="nextLink" onmouseover="style.color='red';" onmouseout="style.color='#034AF3';">&gt;&gt;</div></td>
+            </tr>
+            </tfoot>
+            {{/if}}
             <tbody></tbody>
         </table>
     </div>

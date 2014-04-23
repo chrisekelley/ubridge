@@ -1,7 +1,10 @@
 /*global $*/
 
-    define(['jquery', 'backbone', 'marionette', 'underscore', 'handlebars', 'BackbonePouch', 'PouchDB' ,'collections/FormCollection','form_defs/incidentForm', 'form_defs/actionTakenForm', 'models/Form', 'FORMY', 'models/SyncStatus', 'coconutUtils'],
-    function ($, Backbone, Marionette, _, Handlebars, BackbonePouch, PouchDB, FormCollection, incidentForm, actionTakenForm, Form, FORMY, SyncStatus, coconutUtils) {
+    define(['jquery', 'backbone', 'marionette', 'underscore', 'handlebars', 'BackbonePouch', 'PouchDB' ,
+        'collections/FormCollection','form_defs/incidentForm', 'form_defs/actionTakenForm', 'models/Form', 'FORMY',
+        'models/SyncStatus', 'coconutUtils'],
+    function ($, Backbone, Marionette, _, Handlebars, BackbonePouch, PouchDB, FormCollection, incidentForm, actionTakenForm,
+              Form, FORMY, SyncStatus, coconutUtils) {
         var App = new Backbone.Marionette.Application();
           //incidentList = new IncidentList();
 
@@ -34,6 +37,20 @@
       //var FORMY = {};
       FORMY.forms = new FormCollection();
 
+      App.on("contacts:list", function(){
+         App.navigate("contacts");
+         API.listContacts();
+         });
+
+      App.on("incidentForm", function(id){
+          App.navigate('incidentForm');
+          App.appRouter.options.controller.incidentForm(id)
+      });
+
+      App.on("index", function(id){
+          App.navigate('');
+          App.appRouter.options.controller.index();
+      });
 
       var incidentJson = incidentForm;
       var incident = new Form(incidentJson);

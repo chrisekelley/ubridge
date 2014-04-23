@@ -1,9 +1,9 @@
-define(['App', 'backbone', 'marionette', 'views/DesktopHeaderView','collections/IncidentList','views/IncidentListCompositeView',
+define(['App', 'backbone', 'marionette', 'views/DesktopHeaderView', 'models/Page', 'collections/IncidentList','views/IncidentListCompositeView',
   'FORMY', 'models/Incident', 'models/ActionTaken', 'views/RecordView','views/FormElementView', 'hbs!templates/incidentRecord',
   'hbs!templates/actionTaken','QUERIES', 'views/ActionTakenCompositeView', 'hbs!templates/actionTakenList', 'layouts/RecordActionTakenLayout',
   'models/Record', 'coconutUtils'
 ],
-    function (App, Backbone, Marionette, Header, IncidentList, IncidentListCompositeView, FORMY, Incident, ActionTaken, RecordView,
+    function (App, Backbone, Marionette, Header, Page, IncidentList, IncidentListCompositeView, FORMY, Incident, ActionTaken, RecordView,
               FormElementView, incidentRecordTemplate, actionTakenTemplate, QUERIES, ActionTakenCompositeView, actionTakenListTemplate,
               RecordActionTakenLayout, Record, coconutUtils) {
     return Backbone.Marionette.Controller.extend({
@@ -12,16 +12,7 @@ define(['App', 'backbone', 'marionette', 'views/DesktopHeaderView','collections/
         },
         //gets mapped to in AppRouter's appRoutes
       index:function (endkey) {
-        //App.mainRegion.show(new WelcomeView());
         var incidentList = new IncidentList();
-        var viewOptions = {
-          collection : incidentList
-        };
-        //incidentList.fetch();
-
-        App.headerRegion.show(new Header());
-        App.mainRegion.show(new IncidentListCompositeView(viewOptions));
-
         var limit = 15;
         if (endkey === null || endkey === "" || endkey == "home") {
           endkey = 0;
@@ -66,16 +57,24 @@ define(['App', 'backbone', 'marionette', 'views/DesktopHeaderView','collections/
               //console.log("searchResults: " + JSON.stringify(searchResults));
             }
             console.log("endkey: " + endkey);
+            var page = new Page({content: "Default List of Incidents:", endkey:endkey});
+            var viewOptions = {
+              model: page,
+              collection : incidentList,
+              endkey:endkey
+            };
+            App.headerRegion.show(new Header());
+            App.mainRegion.show(new IncidentListCompositeView(viewOptions));
           }});
       },
-      search: function (searchTerm, department) {
-        console.log("Searching for " + searchTerm + " department: " + department);
+      search: function (searchTerm, departmentId, endkey) {
+        var limit = 15;
+        if (endkey === null || endkey === "" || endkey == "home") {
+          endkey = 0;
+        }
+        console.log("Searching for " + searchTerm + " departmentId: " + departmentId + " endkey: " + endkey);
         var incidentList = new IncidentList();
-        var viewOptions = {
-          collection : incidentList
-        };
-        App.headerRegion.show(new Header());
-        App.mainRegion.show(new IncidentListCompositeView(viewOptions));
+
 
         if ((searchTerm !== "") && (searchTerm !== " ")) {
           //var searchInt = parseInt(searchTerm);
@@ -95,22 +94,62 @@ define(['App', 'backbone', 'marionette', 'views/DesktopHeaderView','collections/
 //                var page = new Page({content: "Default List of Incidents:", startkey_docid:this.startkey_docid, startkey:this.startkey});
 //                var Home = new HomeView(
 //                  {model: page, el: $("#homePageView"), startkey_docid:this.startkey_docid, startkey:this.startkey});
+                var page = new Page({content: "Default List of Incidents:", endkey:endkey, searchTerm: searchTerm, department: departmentId});
+                var viewOptions = {
+                  model: page,
+                  collection : incidentList,
+                  endkey: endkey
+                };
+                App.headerRegion.show(new Header());
+                App.mainRegion.show(new IncidentListCompositeView(viewOptions));
               }}
           );
-        } else if (department !== "") {
-          console.log("Department search");
+        } else if (departmentId !== "") {
+          console.log("departmentId search");
 
           incidentList.fetch(
             {fetch: 'query',
               options: {
                 query: {
-                  fun:QUERIES.byDepartment(department),
-                  descending:true
+                  fun:QUERIES.byDepartment(departmentId),
+                  descending:true,
+                  endkey:parseInt(endkey, 10),
+                  limit:limit
                 }
               },
               success: function(collection, response, options) {
                 console.log("item count: " + collection.length);
                 FORMY.Incidents = incidentList;
+
+                var listLength = incidentList.length;
+                if (listLength < limit) {
+                  limit = listLength;
+                  endkey = null;
+                } else {
+                  var next_start_record = incidentList.at(limit-1);
+                  if (next_start_record) {
+                    endkey_docid = next_start_record.id;
+                    console.log("next_start_record: " + JSON.stringify(next_start_record));
+                    //console.log("startkey_docid: " + endkey_docid);
+                    endkey = next_start_record.get("lastModified");
+                    FORMY.Incidents = incidentList.remove(next_start_record);
+                  }
+                }
+                if (endkey === "" || endkey === null) {	//home (/)
+                  FORMY.Incidents = incidentList;
+                  endkey = 0;
+                  //console.log("searchResults: " + JSON.stringify(searchResults));
+                }
+                console.log("endkey: " + endkey);
+                var page = new Page({content: "Default List of Incidents:", endkey:endkey, searchTerm: searchTerm, department: departmentId});
+                var viewOptions = {
+                  model: page,
+                  collection : incidentList,
+                  endkey: endkey
+                };
+                App.headerRegion.show(new Header());
+                App.mainRegion.show(new IncidentListCompositeView(viewOptions));
+
 //                var page = new Page({content: "Default List of Incidents:", startkey_docid:this.startkey_docid, startkey:this.startkey});
 //                var Home = new HomeView(
 //                  {model: page, el: $("#homePageView"), startkey_docid:this.startkey_docid, startkey:this.startkey});
@@ -292,6 +331,6 @@ define(['App', 'backbone', 'marionette', 'views/DesktopHeaderView','collections/
             console.log("Error loading Record: " + arguments);
           }
         });
-      },
+      }
     });
 });

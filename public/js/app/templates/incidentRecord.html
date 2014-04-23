@@ -12,7 +12,11 @@
     <!--</table>-->
 <!--</div>-->
 <div id="form-container">
+    {{#if recordId}}
     <h1><a href="#edit/{{recordId}}">{{label}}</a></h1>
+    {{else}}
+    <h1>{{label}}</h1>
+    {{/if}}
     <!--<p>{{#if phone}}-->
         <!--<span class="patientName">Request from {{phone}} on {{#dateFormatdMY created}}{{/dateFormatdMY}}</span>-->
         <!--{{/if}}-->

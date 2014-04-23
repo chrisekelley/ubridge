@@ -4,6 +4,9 @@ require(["App", "routers/AppRouter", "controllers/DesktopController", "jquery", 
         App.appRouter = new AppRouter({
             controller:new AppController()
         });
+//      App.appRouter.controller.listenTo(App.appRouter.controller, "stuff:done", function(stuff){
+//        console.log(stuff);
+//      });
         // Start Marionette Application in desktop mode (default)
         App.start();
 

@@ -6,6 +6,10 @@ See the [Olutindo Readme](https://github.com/chrisekelley/olutindo) for more inf
 # Coconut #
 This application uses a modified version of the [Coconut framework](https://github.com/chrisekelley/coconut).
 
+# Development #
+
+Launch the app by entering 'nodemon'
+
 ## App.js
 App.js inits the app, creating the two regions used in the app, populating the forms, setting up the Backbone PouchDB adapter,
 and starting replication with the master server.
@@ -76,7 +80,7 @@ index.html
 
 ### HTML5 Boilerplate
 
-Uses a large portion of the [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate) HTML and CSS.
+Uses a large portion of the [HTML5 Boilerplate](http://github.com/h5bp/html5-boilerplate) HTML and CSS.
 
 ### Environment
 
@@ -121,7 +125,7 @@ If we look at our App's Require.js configurations, we will see the first thing b
 
 Typically, you want to set a path for any module that will be listed as a dependency in more than one other module (eq. jQuery, Backbone).  This saves you some typing, since you just have to list the alias name, and not the entire file path, when listing dependencies.  After all of the file paths are set, you will find the Shim configuration (Added in Require.js 2.0).
    
-The Shim configuration allows you to easily include non-AMD compatible JavaScript files with Require.js (a separate library such as [Use.js](https://github.com/tbranyen/use.js/) was previously needed for this). This is very important, because Backbone versions > 0.5.3 no longer support AMD (meaning you will get an error if you try to use both Require.js and the latest version of Backbone).  This configuration is a much better solution than manually editing non-AMD compatible JavaScript files to make sure the code is wrapped in a `define` method.  Require.js creator [James Burke](http://tagneto.blogspot.com/) previously maintained AMD compatible forks of both Backbone.js and Underscore.js because of this exact reason.
+The Shim configuration allows you to easily include non-AMD compatible JavaScript files with Require.js (a separate library such as [Use.js](http://github.com/tbranyen/use.js/) was previously needed for this). This is very important, because Backbone versions > 0.5.3 no longer support AMD (meaning you will get an error if you try to use both Require.js and the latest version of Backbone).  This configuration is a much better solution than manually editing non-AMD compatible JavaScript files to make sure the code is wrapped in a `define` method.  Require.js creator [James Burke](http://tagneto.blogspot.com/) previously maintained AMD compatible forks of both Backbone.js and Underscore.js because of this exact reason.
 
 ```js
    shim: {
@@ -151,7 +155,7 @@ The Shim configuration also takes the place for the old Require.js `order` plugi
    }
 ```
 
-> You do not need a shim configuration for [jQuery](http://www.jquery.com) or [lodash](https://github.com/bestiejs/lodash) because they do not have any dependencies.
+> You do not need a shim configuration for [jQuery](http://www.jquery.com) or [lodash](http://github.com/bestiejs/lodash) because they do not have any dependencies.
 
 MobileInit.js
 -------------

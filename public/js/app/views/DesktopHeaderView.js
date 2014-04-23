@@ -1,6 +1,7 @@
 /*global define*/
 
-define(['backbone', 'marionette', 'hbs!templates/desktopHeader','App'], function (Backbone, Marionette,template, App) {
+define(['backbone', 'marionette', 'hbs!templates/desktopHeader','App'],
+  function (Backbone, Marionette,template, App) {
   "use strict";
 
   return Backbone.Marionette.ItemView.extend({
@@ -11,7 +12,7 @@ define(['backbone', 'marionette', 'hbs!templates/desktopHeader','App'], function
       "change #department"  : "search"
     },
     incidentLink: function() {
-      App.appRouter.navigate('incidentForm', true);
+      App.trigger("incidentForm")
     },
     search: function(e) {
       e.preventDefault();
@@ -23,7 +24,7 @@ define(['backbone', 'marionette', 'hbs!templates/desktopHeader','App'], function
       } else if (searchTerm == "" && department != "") {
         console.log("Searching department");
         searchTerm = " ";
-        App.appRouter.navigate('search/' + searchTerm + "/" + department, true);
+        App.appRouter.navigate('search/' + searchTerm + "/" + department + "/0", true);
       } else {
         console.log("Searching keyword");
         App.appRouter.navigate('search/' + searchTerm, true);

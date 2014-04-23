@@ -205,7 +205,7 @@ define(['backbone','FORMY'],function(Backbone, FORMY) {
       var couchdb =  "troubletickets_" +  account.site;
       var subdomain =  "ug" +  account.site;
 
-      var remoteCouch = "http://" + credentials + "@192.168.1.60:5984/" + couchdb + "/";
+      var remoteCouch = "http://" + credentials + "@localhost:5984/" + couchdb + "/";
       // CORS reverse proxy for Cloudant
 //    var remoteCouch = "http://localhost:3000/troubletickets/" + subdomain + "/" + credentials;
 //    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {

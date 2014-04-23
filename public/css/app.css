@@ -115,6 +115,10 @@ tr.over td, tr:hover td
     background: #6EA8E4;
 }
 
+#nextLink {
+    color: #034AF3;
+}
+
 form {
     vertical-align: middle;
 }
